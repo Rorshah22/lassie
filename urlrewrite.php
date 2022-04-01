@@ -32,7 +32,7 @@ $arUrlRewrite=array (
     'PATH' => '/personal/index.php',
     'SORT' => 100,
   ),
-  8 => 
+  10 => 
   array (
     'CONDITION' => '#^/catalog/#',
     'RULE' => '',
@@ -46,6 +46,14 @@ $arUrlRewrite=array (
     'RULE' => '',
     'ID' => 'bitrix:catalog.store',
     'PATH' => '/store/index.php',
+    'SORT' => 100,
+  ),
+  11 => 
+  array (
+    'CONDITION' => '#^\\??(.*)#',
+    'RULE' => '&$1',
+    'ID' => 'bitrix:catalog.smart.filter',
+    'PATH' => '/test.php',
     'SORT' => 100,
   ),
   1 => 

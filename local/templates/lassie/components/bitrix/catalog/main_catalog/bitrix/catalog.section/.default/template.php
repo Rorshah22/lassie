@@ -18,11 +18,7 @@ use \Bitrix\Main\Localization\Loc;
  * |	<!- "items"-container -->
  * |	<!-- pagination-container -->
  * |	<!-- component-end -->
- * $arItem["NAME"] name
- * $arItem["PROPERTIES"]["PRICE"]["VALUE"] price
- * $arItem["PROPERTIES"]["SIZE"]["VALUE"] size
- * $arItem["PROPERTIES"]["SALE"]["VALUE"] sale
- * $arItem["PREVIEW_PICTURE"]["SRC"] картинка
+ * 
  * 
  */
 
@@ -50,7 +46,7 @@ $this->setFrameMode(true);
 
           <option value="12">12</option>
 
-          <option value="9" selected>9</option>
+          <option value="9">9</option>
 
           <option value="6">6</option>
 
@@ -71,12 +67,13 @@ $this->setFrameMode(true);
           <article class="good">
             <div class="good__content">
               <a href="javascript:void(0);" class="good__link">
-                <img src='<?= $arItem["PREVIEW_PICTURE"]["SRC"] ?>' alt="Товар" class="good__img" title="">
-                <? if ($arItem["PROPERTIES"]["NEW"]["VALUE"]) : ?>
+
+                <img src='<?= $arItem["DETAIL_PICTURE"]["SRC"] ?>' alt="Товар" class="good__img" title="">
+                <? if ($arItem["PROPERTIES"]["NEWPRODUCT"]["VALUE"]) : ?>
                   <span class="flag flag_type_new">new</span>
-                <? elseif ($arItem["PROPERTIES"]["HIT"]["VALUE"]) : ?>
+                <? elseif ($arItem["PROPERTIES"]["SALELEADER"]["VALUE"]) : ?>
                   <span class="flag flag flag_type_hit">hit</span>
-                <? elseif ($arItem["PROPERTIES"]["SALE"]["VALUE"]) : ?>
+                <? elseif ($arItem["PRICES"]["BASE"]["DISCOUNT_DIFF_PERCENT"]) : ?>
                   <span class="flag flag_type_sale">sale</span>
                 <? else : ?>
 
@@ -84,13 +81,15 @@ $this->setFrameMode(true);
               </a><a href="javascript:void(0);" class="like">Мне нравится</a>
               <h4 class="good__name"><?= $arItem["NAME"] ?></h4>
               <div class="good__price-wrapper">
-                <? if ($arItem["PROPERTIES"]["SALE"]["VALUE"]) : ?>
 
-                  <span class="good__price good__price_new"><?= $arItem["PROPERTIES"]["PRICE"]["VALUE"] ?> р.</span>
-                  <span class="good__price good__price_old"><?= $arItem["PROPERTIES"]["PRICE"]["VALUE"] ?> р.</span>
-                  <span class="good__discount">Скидка <?= $arItem["PROPERTIES"]["SALE"]["VALUE"] ?>% </span>
-                <? else : ?>
-                  <span class="good__price"> <?= $arItem["PROPERTIES"]["PRICE"]["VALUE"] ?> р.</span>
+                <? //TODO изменить отображение скидок
+                if ($arItem["PRICES"]["BASE"]["DISCOUNT_DIFF_PERCENT"]) : ?>
+
+                  <span class="good__price good__price_new"><?= $arItem["PRICES"]["BASE"]["DISCOUNT_VALUE_VAT"] ?> р.</span>
+                  <span class="good__price good__price_old"><?= $arItem["PRICES"]["BASE"]["VALUE_VAT"] ?> р.</span>
+                  <span class="good__discount">Скидка <?= $arItem["PRICES"]["BASE"]["DISCOUNT_DIFF_PERCENT"] ?>% </span>
+                <? elseif ($arItem["PRICES"]["BASE"]["VALUE"]) : ?>
+                  <span class="good__price"> <?= $arItem["PRICES"]["BASE"]["VALUE_VAT"] ?> р.</span>
                 <? endif; ?>
               </div>
             </div>
@@ -128,7 +127,7 @@ $this->setFrameMode(true);
     <? if ($arParams["AJAX"] !== 'y') : ?>
     </div>
 
-    <? if (count($arResult["ITEMS"]) > 12) : ?>
+    <? if (count($arResult["ITEMS"]) >= 12) : ?>
       <div class="catalog__more">
         <a href="javascript:void(0);" class="catalog__more-btn link">
           <span class="icon-load"></span>Загрузить еще 12 товаров</a>

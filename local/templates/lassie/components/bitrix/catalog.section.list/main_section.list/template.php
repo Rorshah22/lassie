@@ -13,6 +13,7 @@
 $this->setFrameMode(true);
 
 
+
 ?>
 
 <nav class="header__nav navigation">
@@ -37,7 +38,13 @@ $this->setFrameMode(true);
 											<?$i = 0;?>
 											<?foreach ($section["SECTION"] as  $itemLevel1) : ?>
 												
-												<li class="vertical-menu__item"><span class="vertical-menu__name"><?=$itemLevel1["NAME"]?></span>
+												<li class="vertical-menu__item">
+													<?if(empty($itemLevel1["SECTION"])):?>
+														<a href="<?=$itemLevel1["SECTION_PAGE_URL"]?>" class="vertical-menu__name"><?=$itemLevel1["NAME"]?></a>
+														<?else:?>
+													<span class="vertical-menu__name"><?=$itemLevel1["NAME"]?>
+												</span>
+												<?endif;?>
 													<ul class="vertical-menu__submenu">
 												
 												

@@ -13,32 +13,38 @@
 
 use Bitrix\Main\Loader;
 use Bitrix\Main\ModuleManager;
-
-
-
-
 // $arParams["ELEMENT_SORT_ORDER"] = 'desc';
+
+// $link = str_replace("/".$arResult['VARIABLES']['SECTION_CODE'],'',$arResult["VARIABLES"]["SECTION_CODE_PATH"]);
 
 
 $list = CIBlockSection::GetNavChain(false, $arResult["VARIABLES"]["SECTION_ID"], array(), true);
 foreach ($list as $arSectionPath) {
 	$rootSection[] = $arSectionPath["NAME"];
+	
 }
 
 if ($rootSection[0] && $rootSection[1]) {
 	//добавляем в цепочку навигации
-	$APPLICATION->AddChainItem("$rootSection[0]", "/catalog/");
+	$APPLICATION->AddChainItem("$rootSection[0]", "" );
 }
-
-
 $this->setFrameMode(true);
-
 ?>
 
 <h1><? $APPLICATION->ShowTitle() ?></h1>
+	
+<?$APPLICATION->IncludeComponent(
+									"bitrix:main.include",
+									".default",
+									Array(
+										"AREA_FILE_SHOW" => "file",
+										"COMPONENT_TEMPLATE" => ".default",
+										"EDIT_TEMPLATE" => "",
+										"PATH" => "/local/templates/lassie/include/section/header_paragraph.php"
+									)
+								);
+								?>
 
-<p data-block='0' class="catalog-page__text">Шапочки, кепки и шляпы Lassie® защищают круглый год. Выбирайте подходящий головной убор: шляпку с полями или кепку с козырьком на лето, тоненькую шапочку без подкладки на осень или весну, и шапку с подкладкой из флиса или джерси на зиму. Многие наши
-	шапочки имеют специальные ветронепроницаемые вставки в области ушей для дополнительной защиты. Для самых маленьких лучшим выбором во время метели и снежной бури станут наши ветрозащитные зимние шапки или шапки из искусственного меха.</p>
 
 <a href="javascript:void(0);" data-btn='0' data-text="Скрыть текст" class="js-block-show link text">Читать
 	далее</a><a href="javascript:void(0);" data-btn='1' data-text="Скрыть фильтр" class="js-block-show link text">Показать фильтр</a>
@@ -86,7 +92,6 @@ $this->setFrameMode(true);
 			"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
 			"AJAX" => $_GET["ajax_mode"],
-			"SHOW_ALL_WO_SECTION" => "Y",
 			"INCLUDE_SUBSECTIONS" => $arParams["INCLUDE_SUBSECTIONS"],
 			"SET_TITLE" => 'N',
 
@@ -135,9 +140,16 @@ $this->setFrameMode(true);
 	); ?>
 </div>
 
-<p data-block='2' class="catalog-page__text">Шапочки, кепки и шляпы Lassie® защищают круглый год. Выбирайте
-	подходящий головной убор: шляпку с полями или кепку с козырьком на лето, тоненькую шапочку без подкладки на
-	осень или весну, и шапку с подкладкой из флиса или джерси на зиму. Многие наши
-	шапочки имеют специальные ветронепроницаемые вставки в области ушей для дополнительной защиты. Для самых
-	маленьких лучшим выбором во время метели и снежной бури станут наши ветрозащитные зимние шапки или шапки из
-	искусственного меха.</p><a href="javascript:void(0);" data-btn='2' data-text="Скрыть текст" class="js-block-show link text">Читать далее</a>
+<? $APPLICATION->IncludeComponent(
+									"bitrix:main.include",
+									".default",
+									Array(
+										"AREA_FILE_SHOW" => "file",
+										"COMPONENT_TEMPLATE" => ".default",
+										"EDIT_TEMPLATE" => "",
+										"PATH" => "/local/templates/lassie/include/section/footer_paragraph.php"
+									)
+								);
+								
+								?>
+<a href="javascript:void(0);" data-btn='2' data-text="Скрыть текст" class="js-block-show link text">Читать далее</a>

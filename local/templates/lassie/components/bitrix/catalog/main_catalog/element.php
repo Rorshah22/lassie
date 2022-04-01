@@ -14,6 +14,9 @@
 
 use Bitrix\Main\Loader;
 use Bitrix\Main\ModuleManager;
+echo '<pre>';
+print_r($arResult);
+echo '</pre>';
 
 $this->setFrameMode(true);
 
