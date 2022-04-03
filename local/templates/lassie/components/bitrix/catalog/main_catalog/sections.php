@@ -28,25 +28,25 @@ if (in_array($_GET["page"], [3, 6, 9, 12])) {
 }
 
 if ($_GET["load_item"] === '2') {
-	// $page = $_GET["page"] ;
-	$page = '';
+	$page = $_GET["page"] ;
+	// $page = '';
 	# code...
 } 
 
 if (isset($_GET["sortBy"])) {
-	if ($_GET["sortBy"] === "popular") {
+	if ($_GET["sortBy"] === "popular" || $_GET["sortBy"] === "Популярности") {
 		$sort= 'PROPERTY_TREND';
 		$order = "desc";
 	}
-	if ($_GET["sortBy"] === "price") {
+	if ($_GET["sortBy"] === "price" || $_GET["sortBy"] === "Цене") {
 		$sort= 'CATALOG_PRICE_1';
 		$order = "asc";
 	}
-	if ($_GET["sortBy"] === "new") {
+	if ($_GET["sortBy"] === "new" || $_GET["sortBy"] === "Новизне") {
 		$sort= 'PROPERTY_NEW';
 		$order = "desc";
 	}
-	if ($_GET["sortBy"] === "availibel") {
+	if ($_GET["sortBy"] === "availibel" || $_GET["sortBy"] === "Наличию") {
 		$sort= 'CATALOG_QUANTITY';
 		$order = 'desc';
 	}
