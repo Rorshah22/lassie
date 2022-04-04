@@ -22,7 +22,11 @@ use \Bitrix\Main\Localization\Loc;
  * 
  */
 
+echo '<pre>';
+// print_r($arrFilter);
+echo '</pre>';
 
+use Bitrix\Main\Page\Asset;
 
 $this->setFrameMode(true);
 ?>
@@ -56,7 +60,7 @@ $this->setFrameMode(true);
       </div>
     </div>
 
-    <div class="catalog__goods-wrapper">
+    <div class="catalog__goods-wrapper" id="category">
     <? endif; ?>
     <ul class="goods" data-section_id=<?= $arParams["SECTION_ID"] ?>>
 
@@ -125,6 +129,7 @@ $this->setFrameMode(true);
     </ul>
 
     <? if ($arParams["AJAX"] !== 'y') : ?>
+
     </div>
 
     <? if (count($arResult["ITEMS"]) >= 12) : ?>

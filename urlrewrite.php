@@ -32,7 +32,7 @@ $arUrlRewrite=array (
     'PATH' => '/personal/index.php',
     'SORT' => 100,
   ),
-  10 => 
+  14 => 
   array (
     'CONDITION' => '#^/catalog/#',
     'RULE' => '',
@@ -48,7 +48,7 @@ $arUrlRewrite=array (
     'PATH' => '/store/index.php',
     'SORT' => 100,
   ),
-  11 => 
+  13 => 
   array (
     'CONDITION' => '#^\\??(.*)#',
     'RULE' => '&$1',

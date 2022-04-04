@@ -29,6 +29,7 @@ if ($rootSection[0] && $rootSection[1]) {
 	$APPLICATION->AddChainItem("$rootSection[0]", "" );
 }
 $this->setFrameMode(true);
+// if ($_GET ["AJAX_CALL"] !== "Y"):
 ?>
 
 <h1><? $APPLICATION->ShowTitle() ?></h1>
@@ -50,15 +51,18 @@ $this->setFrameMode(true);
 	далее</a><a href="javascript:void(0);" data-btn='1' data-text="Скрыть фильтр" class="js-block-show link text">Показать фильтр</a>
 
 <div class="catalog catalog-page__catalog">
+
 	<?
+	
 	$APPLICATION->IncludeComponent(
 		"bitrix:catalog.smart.filter",
-		"",
+		"visual_vertical",
 		array(
 			"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
 			"SECTION_ID" => $arCurSection['ID'],
-			"FILTER_NAME" => $arParams["FILTER_NAME"],
+			// "FILTER_NAME" => $arParams["FILTER_NAME"],
+			"FILTER_NAME" => "arrFilter",
 			"PRICE_CODE" => $arParams["~PRICE_CODE"],
 			"CACHE_TYPE" => $arParams["CACHE_TYPE"],
 			"CACHE_TIME" => $arParams["CACHE_TIME"],
@@ -73,21 +77,23 @@ $this->setFrameMode(true);
 			'CONVERT_CURRENCY' => $arParams['CONVERT_CURRENCY'],
 			'CURRENCY_ID' => $arParams['CURRENCY_ID'],
 			"SEF_MODE" => $arParams["SEF_MODE"],
-			"SEF_RULE" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["smart_filter"],
+			"SEF_RULE" => "/catalog/#SECTION_CODE_PATH#/filter/#SMART_FILTER_PATH#/apply/",
+			// "SEF_RULE" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["smart_filter"],
 			"SMART_FILTER_PATH" => $arResult["VARIABLES"]["SMART_FILTER_PATH"],
 			"PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
-			"INSTANT_RELOAD" => $arParams["INSTANT_RELOAD"],
+			"INSTANT_RELOAD" => "Y",
+			// "INSTANT_RELOAD" => $arParams["INSTANT_RELOAD"],
 			"SHOW_ALL_WO_SECTION" => "Y",
 		),
 		$component,
 		array('HIDE_ICONS' => 'Y')
 	);
 
-
+// endif;
 
 	$APPLICATION->IncludeComponent(
 		"bitrix:catalog.section",
-		"",
+		".default",
 		array(
 			"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 			"IBLOCK_ID" => $arParams["IBLOCK_ID"],
@@ -106,7 +112,8 @@ $this->setFrameMode(true);
 			"ACTION_VARIABLE" => $arParams["ACTION_VARIABLE"],
 			"PRODUCT_ID_VARIABLE" => $arParams["PRODUCT_ID_VARIABLE"],
 			"SECTION_ID_VARIABLE" => $arParams["SECTION_ID_VARIABLE"],
-			"FILTER_NAME" => $arParams["FILTER_NAME"],
+			// "FILTER_NAME" => $arParams["FILTER_NAME"],
+			"FILTER_NAME" => "arrFilter",
 			"DISPLAY_PANEL" => $arParams["DISPLAY_PANEL"],
 			"CACHE_TYPE" => $arParams["CACHE_TYPE"],
 			"CACHE_TIME" => $arParams["CACHE_TIME"],

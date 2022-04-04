@@ -8,12 +8,12 @@ echo '</pre>';
 
 $APPLICATION->IncludeComponent(
 	"bitrix:catalog.smart.filter", 
-	".default_old", 
+	"visual_vertical", 
 	array(
 		"CACHE_GROUPS" => "Y",
 		"CACHE_TIME" => "36000000",
 		"CACHE_TYPE" => "A",
-		"COMPONENT_TEMPLATE" => ".default_old",
+		"COMPONENT_TEMPLATE" => "visual_vertical",
 		"CONVERT_CURRENCY" => "N",
 		"DISPLAY_ELEMENT_COUNT" => "Y",
 		"FILTER_NAME" => "arrFilter",

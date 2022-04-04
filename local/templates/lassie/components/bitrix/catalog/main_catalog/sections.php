@@ -13,12 +13,9 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die();
 /** @var string $componentPath */
 /** @var CBitrixComponent $component */
 
-$this->setFrameMode(true);
+// $this->setFrameMode(true);
 
 
-echo '<pre>';
-// print_r(($arParams));
-echo '</pre>';
 
 if (in_array($_GET["page"], [3, 6, 9, 12])) {
 	$page = $_GET["page"];
@@ -29,8 +26,6 @@ if (in_array($_GET["page"], [3, 6, 9, 12])) {
 
 if ($_GET["load_item"] === '2') {
 	$page = $_GET["page"] ;
-	// $page = '';
-	# code...
 } 
 
 if (isset($_GET["sortBy"])) {
@@ -54,6 +49,7 @@ if (isset($_GET["sortBy"])) {
 	$sort= '';
 	$order = "asc";
 }
+
 
 
 
@@ -81,15 +77,19 @@ if ($_GET["ajax_mode"] == 'y') {
 		далее</a><a href="javascript:void(0);" data-btn='1' data-text="Скрыть фильтр" class="js-block-show link text">Показать фильтр</a>
 
 	<div class="catalog catalog-page__catalog">
+	
 		<?
+	
+		
+		
 		$APPLICATION->IncludeComponent(
 			"bitrix:catalog.smart.filter",
-			"",
+			"visual_vertical",
 			array(
 				"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 				"IBLOCK_ID" => $arParams["IBLOCK_ID"],
 				"SECTION_ID" => $arCurSection['ID'],
-				"FILTER_NAME" => $arParams["FILTER_NAME"],
+				"FILTER_NAME" => "arrFilter",
 				"PRICE_CODE" => $arParams["~PRICE_CODE"],
 				"CACHE_TYPE" => $arParams["CACHE_TYPE"],
 				"CACHE_TIME" => $arParams["CACHE_TIME"],
@@ -104,14 +104,15 @@ if ($_GET["ajax_mode"] == 'y') {
 				'CONVERT_CURRENCY' => $arParams['CONVERT_CURRENCY'],
 				'CURRENCY_ID' => $arParams['CURRENCY_ID'],
 				"SEF_MODE" => $arParams["SEF_MODE"],
-				"SEF_RULE" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["smart_filter"],
+				"SEF_RULE" => "/catalog/#SECTION_CODE_PATH#/filter/#SMART_FILTER_PATH#/apply/",
+				// "SEF_RULE" => $arResult["FOLDER"] . $arResult["URL_TEMPLATES"]["smart_filter"],
 				"SMART_FILTER_PATH" => $arResult["VARIABLES"]["SMART_FILTER_PATH"],
 				"PAGER_PARAMS_NAME" => $arParams["PAGER_PARAMS_NAME"],
-				"INSTANT_RELOAD" => $arParams["INSTANT_RELOAD"],
+				// "INSTANT_RELOAD" => $arParams["INSTANT_RELOAD"],
+				"INSTANT_RELOAD" => "Y",
 				"SHOW_ALL_WO_SECTION" => "Y",
 			),
 			$component,
-			array('HIDE_ICONS' => 'Y')
 		);
 		?>
 	<? endif; ?>
@@ -120,6 +121,8 @@ if ($_GET["ajax_mode"] == 'y') {
 
 	$section = $_GET["section_id"] ?? $arResult["VARIABLES"]["SECTION_ID"];
 
+// 	global $arrFilter; 
+// print_r($arrFilter); 
 	$APPLICATION->IncludeComponent(
 		"bitrix:catalog.section",
 		"",
@@ -133,7 +136,6 @@ if ($_GET["ajax_mode"] == 'y') {
 			"AJAX" => $_GET["ajax_mode"],
 			"ELEMENT_SORT_FIELD" => $sort,
 			// "ELEMENT_SORT_FIELD" => $arParams["ELEMENT_SORT_FIELD"],
-		
 			"ELEMENT_SORT_ORDER" => $order,
 			// "ELEMENT_SORT_ORDER" => $arParams["ELEMENT_SORT_ORDER"],
 			"PROPERTY_CODE" => $arParams["LIST_PROPERTY_CODE"],
@@ -145,7 +147,8 @@ if ($_GET["ajax_mode"] == 'y') {
 			"ACTION_VARIABLE" => $arParams["ACTION_VARIABLE"],
 			"PRODUCT_ID_VARIABLE" => $arParams["PRODUCT_ID_VARIABLE"],
 			"SECTION_ID_VARIABLE" => $arParams["SECTION_ID_VARIABLE"],
-			"FILTER_NAME" => $arParams["FILTER_NAME"],
+			// "FILTER_NAME" => $arParams["FILTER_NAME"],
+			"FILTER_NAME" => "arrFilter",
 			"DISPLAY_PANEL" => $arParams["DISPLAY_PANEL"],
 			"CACHE_TYPE" => $arParams["CACHE_TYPE"],
 			"CACHE_TIME" => $arParams["CACHE_TIME"],

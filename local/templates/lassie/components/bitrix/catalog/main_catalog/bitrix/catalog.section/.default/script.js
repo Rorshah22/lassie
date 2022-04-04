@@ -1,4 +1,6 @@
+
 window.onload = () => {
+
   const count = document.querySelector("#count_page-styler");
   const sort = document.querySelector("#select_sort-styler");
   const catalog = document.querySelector('.catalog__goods-wrapper');
